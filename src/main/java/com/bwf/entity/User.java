@@ -1,4 +1,7 @@
 package com.bwf.entity;
+
+import java.util.List;
+
 /**
  * 数据库中user表的实体类
  * @author admin
@@ -12,6 +15,22 @@ public class User {
 	private String nickName;
 	private Integer leaderId;
 	private String avater;
+	
+	private List<Menu> menus;
+	private List<Operate> operates;
+	
+	public List<Menu> getMenus() {
+		return menus;
+	}
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
+	public List<Operate> getOperates() {
+		return operates;
+	}
+	public void setOperates(List<Operate> operates) {
+		this.operates = operates;
+	}
 	public Integer getUserId() {
 		return userId;
 	}
@@ -59,6 +78,11 @@ public class User {
 	}
 	public User() {
 		super();
+	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", nickName=" + nickName
+				+ ", leaderId=" + leaderId + ", avater=" + avater + "]";
 	}
 	
 	

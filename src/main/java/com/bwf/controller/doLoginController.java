@@ -13,6 +13,11 @@ public class doLoginController {
 
 	@GetMapping("doLogin")
 	public String doLogin(){
-		return "login/doLogin";
+		return "login/index";
+	}
+	
+	@GetMapping("home")
+	public String home(){
+		return "login/home";
 	}
 }

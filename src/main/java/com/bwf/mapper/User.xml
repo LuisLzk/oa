@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 对应 dao 中的 接口 -->
-<mapper namespace="com.bwf.dao.userMapper">
+<mapper namespace="com.bwf.dao.UserMapper">
 
 	<resultMap type="com.bwf.entity.User" id="simpleUser">
 		<id column="user_id" property="userId"/>
@@ -17,9 +17,9 @@
 
 	<resultMap type="com.bwf.entity.User" id="nbUser">
 		<id column="user_id" property="userId"/>
-		<result column="username" property="username"/>
+		<result column="user_name" property="userName"/>
 		<result column="password" property="password"/>
-		<result column="nickname" property="nickname"/>
+		<result column="nick_name" property="nickName"/>
 		<result column="avater" property="avater"/>
 		
 		<collection property="menus" ofType="com.bwf.entity.Menu" resultMap="com.bwf.dao.MenuMapper.menu">
@@ -43,22 +43,19 @@
     	select * from `user` where user_name = #{userName} and password = #{password}
    	</select>
    	
-   	<!-- 根据用户id获取菜单， 操作的集合 -->
-   	<select id="getMenusAndOperatesByUserId" parameterType="int" resultMap="nbUser">
-   		SELECT
-		user.* , menu.* , operate.*
-		FROM user		 
-		INNER JOIN user_role ON user_role.user_id = user.user_id
-		INNER JOIN role ON user_role.role_id = role.role_id
-		INNER JOIN role_permission ON role_permission.role_id = role.role_id
-		INNER JOIN permission ON role_permission.permission_id = permission.permission_id
-		left outer join permission_menu ON permission_menu.permission_id = permission.permission_id
-		left outer join menu ON permission_menu.menu_id = menu.menu_id
-		left outer join permission_operate on permission.permission_id = permission_operate.permission_id
-		left outer join operate on permission_operate.operate_id = operate.operate_id
+   	<!-- 根据用户id获取菜单， 操作的集合-->
+   	<select id="getMenuAndoperateByUserId" parameterType="int" resultMap="nbUser">
+   		select user.*,menu.* ,operate.* from user inner join user_role on user.user_id=user_role.user_id
+		inner join role on user_role.role_id=role.role_id
+		inner join role_permission on role.role_id=role_permission.role_id
+		inner join permission on role_permission.permission_id=permission.permission_id
+		left outer join permission_menu on permission.permission_id=permission_menu.permission_id
+		left outer join menu on permission_menu.menu_id=menu.menu_id
+		left outer join permission_operate on permission.permission_id=permission_operate.permission_id
+		left outer join operate on permission_operate.operate_id=operate.operate_id
 		WHERE user.user_id = #{userId}
    	</select>
-    
+     
     <!-- 增加一个 user -->
     <insert id="add" parameterType="com.bwf.entity.User" useGeneratedKeys="true" keyProperty="user_id">
     	insert into `user` values ( null , #{username} , #{password} , #{nickname} , #{leaderId} , #{avater}  )

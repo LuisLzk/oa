@@ -5,4 +5,6 @@ import com.bwf.entity.User;
 public interface IuserService {
 
 	User login(User user);
+
+	
 }

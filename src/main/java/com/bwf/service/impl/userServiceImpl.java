@@ -1,5 +1,7 @@
 package com.bwf.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,16 @@ public class userServiceImpl implements IuserService {
 			return user1;
 		}
 		return u;
+	}
+	@Override
+	public List<User> getAllUsers(Integer page,Integer pageSize) {
+		List<User> users=userMapper.getAllUsers((page-1)*pageSize,pageSize);
+		return users;
+	}
+	@Override
+	public Integer getAllCounts() {
+		
+		return userMapper.getAllCounts();
 	}
 	
 }

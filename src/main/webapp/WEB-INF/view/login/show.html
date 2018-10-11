@@ -11,6 +11,67 @@
 		<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
 		<script type="text/javascript" src="${rc.contextPath}/suport/js/global.js" ></script>
 	</head>
+	<script type="text/javascript">
+		$(function(){
+		
+			var page1=${page};
+			console.log(page1);
+			//首页
+			$('#firstPage').click(function(){
+				location.href='${rc.contextPath}/show?page=1';
+			});
+			//上一页
+			$('#prevPage').click(function(){
+				
+				if(page1===1){
+				
+					location.href='${rc.contextPath}/show?page=1';
+				}else{
+					location.href='${rc.contextPath}/show?page='+(page1-1);
+				}
+				
+			});
+			//下一页
+			$('#nextPage').click(function(){
+				if(page1==${allPage}){
+					location.href='${rc.contextPath}/show?page='+${allPage};
+				}else{
+					location.href='${rc.contextPath}/show?page='+(${page}+1);
+				}
+				
+			});
+			//末页
+			$('#lastPage').click(function(){
+				location.href='${rc.contextPath}/show?page='+${allPage};
+			});
+			
+			//生成按钮
+			for(var i=${allPage};i>0;i--){
+				if(i===${page}){
+					$('#prevPage').after(
+					'<button type="button" style="background:yellow;" class="btn btn-default hidden-xs btnPage disabled" >'+i+'</button>'
+					);
+				
+				}else{
+					$('#prevPage').after(
+					'<button type="button" class="btn btn-default hidden-xs btnPage" >'+i+'</button>'
+					);
+				}
+				
+			}
+			//按钮分页
+			$('.btnPage').click(function(){
+	  			location.href='${rc.contextPath}/show?page='+$(this).html();
+	  		});
+	  		//跳转
+	  		$('#search').click(function(){
+	  			location.href='${rc.contextPath}/show?page='+$('#text').val();
+	  		
+	  		});
+		
+		});
+	
+	</script>
 	<body>
 			
 			<form action="" method="POST" role="form">
@@ -37,32 +98,27 @@
 						
 						<table class="table table-bordered table-condensed table-hover table-responsive cbx-group">
 							<thead>
-								<th class="td-checkbox"><input type="checkbox" class="cbx-all"/></th>
-								<th>表格标题</th>
-								<th>表格标题</th>
-								<th>表格标题</th>
-								<th>表格标题</th>							
-								<th class="hidden-xs hidden-sm hidden-md">表格标题</th>
-								<th class="hidden-xs hidden-sm hidden-md">表格标题</th>
-								<th class="hidden-xs hidden-sm">表格标题</th>
-								<th class="hidden-xs hidden-sm">表格标题</th>
-								<th class="hidden-xs">表格标题</th>
-								<th class="hidden-xs">表格标题</th>
-								<th>操作选项</th>
+								<tr>
+									<th class="td-checkbox"><input type="checkbox" class="cbx-all"/></th>
+									<th>员工编号</th>
+									<th>员工姓名</th>
+									<th>员工密码</th>
+									<th>员工昵称</th>
+									<th>员工上级</th>
+									<th>员工头像</th>
+									<th>操作选项</th>
+								</tr>
 							</thead>
 							<tbody>
+								<#list allUsers as user1>
 								<tr >
 									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
+									<td >${user1.userId}</td>
+									<td >${user1.userName}</td>
+									<td >${user1.password}</td>
+									<td >${user1.nickName}</td>
+									<td >${user1.leader.nickName}</td>
+									<td ><img alt="头像" class="image image-responsive" style="height:30px;" src="${rc.contextPath}/suport/avaters/${user1.avater}"></td>
 									<td width="120px">
 										<span class="btn-group btn-group-xs" >
 											<button type="button" class="btn btn-default">查看</button>
@@ -71,186 +127,7 @@
 										</span>
 									</td>
 								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
-								<tr >
-									<td align="center" class="td-checkbox"><input type="checkbox" name="id"/></td>
-									<td >表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td>表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm hidden-md">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs hidden-sm">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td class="hidden-xs">表格数据</td>
-									<td width="120px">
-										<span class="btn-group btn-group-xs" >
-											<button type="button" class="btn btn-default">查看</button>
-											<button type="button" class="btn btn-default">编辑</button>
-											<button type="button" class="btn btn-danger">删除</button>
-										</span>
-									</td>
-								</tr>
+								</#list>
 							</tbody>
 							<tfoot>
 								
@@ -260,52 +137,20 @@
 						<div class="row">
 							<div class="col-lg-8 col-md-7 col-sm-7 col-xs-5">
 								<div class="btn-group btn-group-sm">
-									<button type="button" class="btn btn-darkgreen">
+									<button id="firstPage" type="button" class="btn btn-darkgreen">
 										<span class="hidden-xs hidden-sm"> 首 页 </span>
 										<span class="hidden-lg hidden-md"> |&lt; </span>
 									</button>
-									<button type="button" class="btn btn-darkgreen">
+									<button id="prevPage" type="button" class="btn btn-darkgreen">
 										<span class="hidden-xs hidden-sm"> 上一页 </span>
 										<span class="hidden-lg hidden-md"> &lt;&lt; </span>
 									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm">
-										.…
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm hidden-md">
-										3
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm">
-										4
-									</button>
-									<button type="button" class="btn btn-default hidden-xs">
-										5
-									</button>
-									<button type="button" class="btn btn-default hidden-xs">
-										6
-									</button>
-									<button type="button" class="btn btn-darkgreen hidden-xs">
-										7
-									</button>
-									<button type="button" class="btn btn-default hidden-xs">
-										8
-									</button>
-									<button type="button" class="btn btn-default hidden-xs">
-										9
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm">
-										10
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm hidden-md">
-										11
-									</button>
-									<button type="button" class="btn btn-default hidden-xs hidden-sm">
-										.…
-									</button>
-									<button type="button" class="btn btn-darkgreen">
+									
+									<button id="nextPage" type="button" class="btn btn-darkgreen">
 										<span class="hidden-xs hidden-sm"> 下一页 </span>
 										<span class="hidden-lg hidden-md"> &gt;&gt; </span>
 									</button>
-									<button type="button" class="btn btn-darkgreen">
+									<button id="lastPage" type="button" class="btn btn-darkgreen">
 										<span class="hidden-xs hidden-sm"> 末 页 </span>
 										<span class="hidden-lg hidden-md"> &gt;| </span>
 									</button>
@@ -314,10 +159,10 @@
 							</div>
 							<div class="col-lg-4 col-md-5 col-sm-5 col-xs-7">
 								<div class="input-group input-group-sm">
-									<input type="text" class="form-control" placeholder="7" />
-									<span class="input-group-addon"> / 60 页 </span>
+									<input id="text" type="text" class="form-control" placeholder="请输入页数，例如：2" />
+									<span class="input-group-addon"> / ${allPage} 页 </span>
 									<div class="input-group-btn">
-										<button type="button" class="btn btn-darkgreen">
+										<button id="search" type="button" class="btn btn-darkgreen">
 											Go
 										</button>
 									</div>

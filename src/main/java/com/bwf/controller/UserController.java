@@ -70,7 +70,23 @@ public class UserController {
 	
 	//显示所有员工
 	@GetMapping("show")
-	public String show(){
+	public String show(ModelMap modelMap,Integer page){
+		if(page==null){
+			page=1;
+		}
+		//每页10条数据
+		Integer pageSize=10;
+		//总共有多少条数据
+		Integer allCount=iuserService.getAllCounts();
+		//分多少页
+		Integer allPage=(int)Math.ceil(allCount*1.0/pageSize);
+		//分页
+		List<User> allUsers=iuserService.getAllUsers(page,pageSize);
+		
+		modelMap.addAttribute("allUsers",allUsers);
+		modelMap.addAttribute("page", page);
+		modelMap.addAttribute("allPage", allPage);
+		
 		return "login/show";
 	}
 }

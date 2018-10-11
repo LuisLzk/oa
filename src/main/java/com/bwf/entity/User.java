@@ -19,6 +19,16 @@ public class User {
 	private List<Menu> menus;
 	private List<Operate> operates;
 	
+	private User leader;
+	
+	
+	
+	public User getLeader() {
+		return leader;
+	}
+	public void setLeader(User leader) {
+		this.leader = leader;
+	}
 	public List<Menu> getMenus() {
 		return menus;
 	}

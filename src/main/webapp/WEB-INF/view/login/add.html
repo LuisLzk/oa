@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>BWFUIFramework</title>
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/animate.min.css" />
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/wow.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/global.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/select2.min.css">
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/select2.full.min.js" ></script>
+	</head>
+	
+	<script type="text/javascript">
+		$(function(){
+			//下拉菜单可选
+			$('#selectLeader').select2();
+		
+		
+			//判断用户名是否可用
+			$('#userName').blur(function(){
+				$('.userNameSpa').remove();
+				var jsondata={
+				'userName' : $('#userName').val()
+				};
+			$.ajax({
+				'type' : 'GET',
+				'url'  : '${rc.contextPath}/addUser',
+				'data' : jsondata,
+				'success' : function(dat){
+					if(dat===1){
+						$('#userName').before('<span class="userNameSpa" style="color:red;">✖ 用户名不可用</span>')
+					}else if(dat===0){
+						$('#userName').before('<span class="userNameSpa" style="color:green;">✔</span>')
+						}
+					},
+				'datatype':'html'
+				});
+			});
+			
+			//确认密码
+			$('#confirmPassword').blur(function(){
+				$('.spa').remove();
+				if($('#confirmPassword').val()===$('#password').val()){
+					$('#password').before('<span class="spa" style="color:green;">✔</span>');
+					$('#confirmPassword').before('<span class="spa" style="color:green;">✔</span>')
+				}else{
+					$('#confirmPassword').before('<span class="spa" style="color:red;">✖,确认密码输入有误！</span>')
+				}
+			});
+			
+			//确认昵称
+			$('#nickName').blur(function(){
+				$('#nickName').before('<span style="color:green;">✔</span>');
+			
+			});
+		});
+		
+	</script>
+	<body>
+		
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<button onclick="history.back();" type="button" class="btn btn-default btn-back btn-sm"> 返 回 </button>&nbsp;&nbsp;添加用户
+				</div>
+				<div class="panel-body">
+					<form action="${rc.contextPath}/doAdd" method="POST" role="form">
+						用户名：
+						<input id="userName" type="text" name="userName" class="form-control"  placeholder="userName"/>
+						密码：
+						<input id="password" type="password" name="password" class="form-control" placeholder="password" />
+						
+						确认密码：
+						<input id="confirmPassword" type="password" class="form-control" placeholder="confirmPassword" />
+						昵称：
+						<input id="nickName" type="text" name="nickName" class="form-control" placeholder="nickeName" />
+						选择上级：
+						<select name="leader.userId" class="form-control" id="selectLeader">
+							<option value="option">-- 请选择上级 --</option>
+							<#list allUser as user1>
+								<option value="${user1.userId}">${user1.nickName}</option>
+							</#list>
+						</select>
+						
+						
+						<button type="submit" class="btn btn-danger form-control"> 提交表单 </button>
+					
+					</form>
+				</div>
+			</div>
+			
+
+		<div style="height: 80px;"></div>
+	</body>
+</html>

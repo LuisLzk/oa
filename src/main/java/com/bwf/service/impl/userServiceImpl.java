@@ -36,5 +36,15 @@ public class userServiceImpl implements IuserService {
 		
 		return userMapper.getAllCounts();
 	}
+	@Override
+	public List<User> getAllUser() {
+		
+		return userMapper.getAllUser();
+	}
+	@Override
+	public User checkUser(String userName) {
+		// TODO Auto-generated method stub
+		return userMapper.checkUser(userName);
+	}
 	
 }

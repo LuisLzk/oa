@@ -16,4 +16,8 @@ public interface UserMapper {
 	List<User> getAllUsers(@Param("page")Integer page,@Param("pageSize") Integer pageSize);
 
 	Integer getAllCounts();
+
+	List<User> getAllUser();
+
+	User checkUser(@Param("userName")String userName);
 }

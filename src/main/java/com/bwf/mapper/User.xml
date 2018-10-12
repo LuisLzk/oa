@@ -65,9 +65,14 @@
 		WHERE user.user_id = #{userId}
    	</select>
    	
-   	<!-- 查询所有用户 -->
+   	<!-- 查询所有用户,分页 -->
    	<select id="getAllUsers" resultMap="simpleUser">
         select * from `user`limit #{page},#{pageSize}
+    </select>
+    
+    <!-- 查询所有用户 -->
+   	<select id="getAllUser" resultMap="simpleUser">
+        select * from `user`
     </select>
     
     <!-- 查询用户表总共有多少条数据 -->
@@ -75,11 +80,17 @@
      	select count(*) from `user`
      </select>
      
+     <!-- 验证用户名 -->
+     <select id="checkUser" parameterType="String" resultMap="simpleUser">
+     	select * from `user` where user_name=#{userName}
+     </select>
+    
     <!-- 增加一个 user -->
     <insert id="add" parameterType="com.bwf.entity.User" useGeneratedKeys="true" keyProperty="user_id">
     	insert into `user` values ( null , #{username} , #{password} , #{nickname} , #{leaderId} , #{avater}  )
     </insert>
     
+   
     <!-- 删除 一个 user -->
     <delete id="delete" parameterType="int">
     	delete from user where user_id = #{id}

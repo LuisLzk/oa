@@ -12,6 +12,10 @@ public interface IuserService {
 
 	Integer getAllCounts();
 
+	List<User> getAllUser();
+
+	User checkUser(String userName);
+
 	
 
 	

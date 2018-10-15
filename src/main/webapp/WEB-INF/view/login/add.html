@@ -16,6 +16,11 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			var ok1=false;
+			var ok2=false;
+			var ok3=false;
+			var ok4=false;
+			var ok5=false;
 			//下拉菜单可选
 			$('#selectLeader').select2();
 		
@@ -35,18 +40,31 @@
 						$('#userName').before('<span class="userNameSpa" style="color:red;">✖ 用户名不可用</span>')
 					}else if(dat===0){
 						$('#userName').before('<span class="userNameSpa" style="color:green;">✔</span>')
+						ok1=true;
 						}
 					},
 				'datatype':'html'
 				});
+			});
+			//确认密码
+			$('#password').blur(function(){
+				var value=/^[0-9]{6,12}$/
+				$('#passwordSpan').remove();
+				if(value.test($('#password').val())){
+					$('#password').before('<span id="passwordSpan" class="span" style="color:green;">✔</span>');
+					ok2=true;
+				}else{
+					$('#password').before('<span id="passwordSpan" class="span" style="color:red;">✖ 密码格式有误，请重新输入</span>');
+				}
 			});
 			
 			//确认密码
 			$('#confirmPassword').blur(function(){
 				$('.spa').remove();
 				if($('#confirmPassword').val()===$('#password').val()){
-					$('#password').before('<span class="spa" style="color:green;">✔</span>');
+					
 					$('#confirmPassword').before('<span class="spa" style="color:green;">✔</span>')
+					ok3=true;
 				}else{
 					$('#confirmPassword').before('<span class="spa" style="color:red;">✖,确认密码输入有误！</span>')
 				}
@@ -54,10 +72,59 @@
 			
 			//确认昵称
 			$('#nickName').blur(function(){
-				$('#nickName').before('<span style="color:green;">✔</span>');
+				if($('#nickName').val()===null||$('#nickName').val()===''){
+					$('#nickNameError').remove();
+					$('#nickName').before('<span id="nickNameError" style="color:red;">✖ 请输入您的昵称</span>');
+					
+				}else{
+					$('#nickNameError').remove();
+					$('#nickName').before('<span id="nickNameError" style="color:green;">✔</span>');
+					ok4=true;
+				}
+				
 			
 			});
+			
+			//确认上级
+			if($('#selectLeader').val()==="option"){
+				$('#selectSpan').remove();
+				$('#selectLeader').before('<span id="selectSpan" style="color:red;">✖</span>');
+			}
+			$('#selectLeader').change(function(){
+				if($('#selectLeader').val()!="option"){
+					$('#selectSpan').remove();
+					$('#selectLeader').before('<span id="selectSpan" style="color:green;">✔</span>');
+					ok5=true;
+				}
+			
+			});
+			
+				
+			//确认提交
+			$('#submitButton').click(function(){
+				if(ok1&&ok2&&ok3&&ok4&&ok5){
+					$('#myModalLabel').html('提交成功！')
+					$('#errorMessage').html('提交成功！')
+					//显示错误信息的虚拟按钮
+					$('#openModal').trigger('click');
+					$('#doSubmit').submit();
+				}else{
+					$('#errorMessage').html('你有信息尚未完善！')
+					//显示错误信息的虚拟按钮
+					$('#openModal').trigger('click');
+				}
+			});
+			
+			if(location.href.indexOf('error')!=-1){
+				$('#myModalLabel').html('提交失败！')
+				$('#errorMessage').html(${error})
+				//显示错误信息的虚拟按钮
+				$('#openModal').trigger('click');
+			
+			}
+			
 		});
+		
 		
 	</script>
 	<body>
@@ -67,7 +134,7 @@
 					<button onclick="history.back();" type="button" class="btn btn-default btn-back btn-sm"> 返 回 </button>&nbsp;&nbsp;添加用户
 				</div>
 				<div class="panel-body">
-					<form action="${rc.contextPath}/doAdd" method="POST" role="form">
+					<form id="doSubmit" action="${rc.contextPath}/doAdd" method="POST" role="form">
 						用户名：
 						<input id="userName" type="text" name="userName" class="form-control"  placeholder="userName"/>
 						密码：
@@ -86,12 +153,29 @@
 						</select>
 						
 						
-						<button type="submit" class="btn btn-danger form-control"> 提交表单 </button>
+						<input id="submitButton" type="button" class="btn btn-danger form-control" value="提交表单 "> 
 					
 					</form>
 				</div>
 			</div>
 			
+			<!-- 按钮触发模态框 -->
+	<input id="openModal" type="hidden" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"/>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">提交失败！</h4>
+	            </div>
+	            <div id="errorMessage" class="modal-body">错误信息！</div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+	            </div>
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal -->
+	</div>	
 
 		<div style="height: 80px;"></div>
 	</body>

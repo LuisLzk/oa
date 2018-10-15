@@ -16,6 +16,17 @@ public interface IuserService {
 
 	User checkUser(String userName);
 
+	void add(User us);
+
+	void deletUser(Integer userId);
+
+	void deletUsers(Integer[] idList);
+
+	User getUserById(Integer userId);
+
+	void updateUser(User user, boolean b);
+
+	
 	
 
 	

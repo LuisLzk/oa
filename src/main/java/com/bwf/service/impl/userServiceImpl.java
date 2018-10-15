@@ -46,5 +46,38 @@ public class userServiceImpl implements IuserService {
 		// TODO Auto-generated method stub
 		return userMapper.checkUser(userName);
 	}
+	@Override
+	public void add(User us) {
+		// TODO Auto-generated method stub
+		us.setPassword(StringUtil.md5(us.getPassword()));
+		userMapper.add(us);
+	}
+	@Override
+	public void deletUser(Integer userId) {
+		// TODO Auto-generated method stub
+		userMapper.deletUser(userId);
+	}
+	@Override
+	public void deletUsers(Integer[] idList) {
+		// TODO Auto-generated method stub
+		for(Integer id:idList){
+			System.out.println(id);
+		}
+		userMapper.deletUsers(idList);
+	}
+	@Override
+	public User getUserById(Integer userId) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserById(userId);
+	}
+	@Override
+	public void updateUser(User user, boolean b) {
+		// TODO Auto-generated method stub
+		if(b){
+			 userMapper.updatewithPassword(user);
+		}else{
+			 userMapper.updatewithoutPassword(user);
+		}
+	}
 	
 }

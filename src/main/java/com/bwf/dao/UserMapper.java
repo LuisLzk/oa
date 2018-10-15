@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.bwf.entity.User;
 public interface UserMapper {
 
-	User getUserById();
+	User getUserById(Integer userId);
 
 	User getUserByUserNameAndPassword(User user);
 
@@ -20,4 +20,16 @@ public interface UserMapper {
 	List<User> getAllUser();
 
 	User checkUser(@Param("userName")String userName);
+
+	void add(User us);
+
+	void deletUser(Integer userId);
+
+	void deletUsers(@Param("idList")Integer[] idList);
+
+	void updatewithPassword(User user);
+
+	void updatewithoutPassword(User user);
+
+	
 }

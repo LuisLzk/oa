@@ -87,13 +87,21 @@
     
     <!-- 增加一个 user -->
     <insert id="add" parameterType="com.bwf.entity.User" useGeneratedKeys="true" keyProperty="user_id">
-    	insert into `user` values ( null , #{username} , #{password} , #{nickname} , #{leaderId} , #{avater}  )
+    	insert into `user` values ( null , #{userName} , #{password} , #{nickName} , #{leaderId} , #{avater}  )
     </insert>
     
    
     <!-- 删除 一个 user -->
-    <delete id="delete" parameterType="int">
+    <delete id="deletUser" parameterType="int">
     	delete from user where user_id = #{id}
+    </delete>
+    
+    <!-- 删除多个user -->
+    <delete id="deletUsers" >
+    	delete from user where user_id in
+    	<foreach collection="idList" open="(" close=")" separator="," item="id">
+    		#{id}
+    	</foreach>
     </delete>
     
     <update id="update" parameterType="com.bwf.entity.User">

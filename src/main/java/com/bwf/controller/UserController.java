@@ -4,13 +4,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,12 +102,21 @@ public class UserController {
 	}
 	
 	@PostMapping("doAdd")
-	public String doAdd(User us){
-		System.out.println("提交成功");
+	public String doAdd(@Valid User us,BindingResult bindingResult,ModelMap modelMap){
+		
 		logger.info(us.getNickName());
 		logger.info(us.getLeader().getUserId()+"");
+		us.setLeaderId(us.getLeader().getUserId());
+		//检验参数是否合法
+		if(bindingResult.hasErrors()){
+			System.out.println(bindingResult.getAllErrors());
+			modelMap.addAttribute("error", bindingResult.getAllErrors());
+			return "redirect:/add";
+		}else{
+			iuserService.add(us);
+			return "redirect:/show";
+		}
 		
-		return "redirect:/add";
 	}
 	//验证用户名
 	@RequestMapping("addUser")
@@ -119,5 +131,41 @@ public class UserController {
 			System.out.println("用户名可用！");
 			return 0;
 		}
+	}
+	
+	//删除单个用户
+	@GetMapping("deletUser/{userId}")
+	public String deletUser(@PathVariable Integer userId){
+		iuserService.deletUser(userId);
+		return "redirect:/show";
+	}
+	
+	//删除多个员工
+	@GetMapping("deletUser")
+	public String deletUser(Integer[] userId){
+		for(Integer id:userId){
+			System.out.println(id);
+		}
+		iuserService.deletUsers(userId);
+		return "redirect:/show";
+	}
+	
+	//编辑员工信息
+	@GetMapping("editUser/{userId}")
+	public String editUser(@PathVariable Integer userId,ModelMap modelMap){
+		logger.info(userId+"");
+		User user1=iuserService.getUserById(userId);
+		logger.info(user1.toString());
+		List<User>users=iuserService.getAllUser();
+		modelMap.addAttribute("user1", user1);
+		modelMap.addAttribute("users", users);
+		return "login/edit";
+	}
+	@PostMapping("doEdit")
+	public String doEdit(User user,String resetPassword){
+		user.setLeaderId(user.getLeader().getLeaderId());
+		logger.info(user.toString());
+		iuserService.updateUser(user,resetPassword!=null);
+		return "redirect:/show";
 	}
 }

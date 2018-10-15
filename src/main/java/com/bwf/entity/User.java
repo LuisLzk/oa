@@ -2,6 +2,9 @@ package com.bwf.entity;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 /**
  * 数据库中user表的实体类
  * @author admin
@@ -10,8 +13,11 @@ import java.util.List;
 public class User {
 
 	private Integer userId;
+	@NotNull
 	private String userName;
+	@Pattern(regexp="^[0-9]{6,12}$")
 	private String password;
+	@NotNull
 	private String nickName;
 	private Integer leaderId;
 	private String avater;

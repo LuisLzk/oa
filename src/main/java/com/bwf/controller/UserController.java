@@ -163,8 +163,9 @@ public class UserController {
 	}
 	@PostMapping("doEdit")
 	public String doEdit(User user,String resetPassword){
-		user.setLeaderId(user.getLeader().getLeaderId());
 		logger.info(user.toString());
+		logger.info("是否修改密码：{}", resetPassword!=null);
+		
 		iuserService.updateUser(user,resetPassword!=null);
 		return "redirect:/show";
 	}

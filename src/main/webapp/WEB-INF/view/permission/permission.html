@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>BWFUIFramework</title>
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/animate.min.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/suport/js/wow.js"></script>
+<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/global.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/Calendar3.js"></script>
+<script type="text/javascript">
+			$(function(){
+				$('#roleId').change(function(){
+					location.href='${rc.contextPath}/permission?roleId='+$(this).val();
+				});
+			
+			});
+			
+		
+		</script>
+</head>
+<body>
+	<div class="panel-heading">
+		<button type="button" class="btn btn-default btn-back btn-sm">
+			返 回</button>
+		&nbsp;&nbsp; 权限管理
+	</div>
+	<div class="panel-body">
+		<form action="${rc.contextPath}/doPermission" method="POST" role="form">
+			
+				
+					<!-- 角色 -->
+					<select id="roleId" name="roleId" class="form-control">
+						<option value="-1">-- 角色 --</option>
+						<#list role as role1>
+							<#if role1.roleId=roleId>
+							<option selected="selected" value="${role1.roleId}">${role1.roleName}</option>
+							<#else>
+							<option value="${role1.roleId}">${role1.roleName}</option>
+							</#if>
+					 	</#list>
+					</select>
+
+					<!-- 一级权限 -->
+					<#list allPermission as permission1> 
+						<#if permission1.pId=null> 
+						<div class="form-control" style="height:80px;">
+							<#if permissionIds?seq_contains(permission1.permissionId)> 
+								<label class="btn btn-default"> 
+									<input checked="checked" type="checkbox" name="permissionId"
+										value="${permission1.permissionId}" />${permission1.permissionName}
+								</label> <br/>
+							<#else> 
+								<label class="btn btn-default"> 
+									<input type="checkbox" name="permissionId"
+										value="${permission1.permissionId}" />${permission1.permissionName}
+								</label> <br/>
+							</#if> 
+					<!-- 二级权限 -->
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+					<#list allPermission as permission2>
+						<#if permission2.pId=permission1.permissionId> 
+							<#if permissionIds?seq_contains(permission1.permissionId)> 
+								<label class="btn btn-default"> 
+									<input checked="checked" type="checkbox" name="permissionId"
+										value="${permission2.permissionId}" />${permission2.permissionName}
+								</label>
+							<#else> 
+								<label class="btn btn-default"> 
+									<input type="checkbox" name="permissionId"
+										value="${permission2.permissionId}" />${permission2.permissionName}
+								</label>
+							</#if> 
+						</#if> 
+					</#list>
+					</div> 
+					</#if> 
+					</#list>
+					
+					<br /> <br />
+					<div class="row row-where">
+						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+							<button type="submit" class="btn btn-darkgreen form-control">
+							提交
+							</button>
+						</div>
+					</div>
+			
+		</form>
+		</div>
+		
+		<div style="height: 80px;"></div>
+	</body>
+</html>

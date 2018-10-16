@@ -104,17 +104,21 @@
     	</foreach>
     </delete>
     
-    <update id="update" parameterType="com.bwf.entity.User">
-    	update `user` set 
-    		username = #{username} , 
-    		password = #{password} , 
-    		nickname = #{nickname} ,
-    		leader_id = #{leaderId} ,
-    		avater = #{avater}
+    <!-- 编辑员工，不重置密码 -->
+    <update id="updatewithoutPassword" parameterType="com.bwf.entity.User">
+    	update `user` set  
+    		nick_name = #{nickName} ,
+    		leader_id = #{leader.userId} 
     	where user_id = #{userId}
     </update>
-    
-   
+    <!-- 编辑员工，重置密码 -->
+   <update id="updatewithPassword" parameterType="com.bwf.entity.User">
+    	update `user` set  
+    		password = '202CB962AC59075B964B07152D234B70',
+    		nick_name = #{nickName} ,
+    		leader_id = #{leader.userId} 
+    	where user_id = #{userId}
+    </update>
     
     
     

@@ -48,10 +48,7 @@ public class PermissionController {
 	//修改权限管理
 	@PostMapping("doPermission")
 	public String doPermission(Integer roleId,Integer[] permissionId){
-		System.out.println(roleId);
-		for(Integer id:permissionId){
-			System.out.println(id);
-		}
-		return null;
+		permission.updatePermision(roleId,permissionId);
+		return "redirect:/permission";
 	}
 }

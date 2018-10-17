@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应 dao 中的 接口 -->
+<mapper namespace="com.bwf.dao.UserRoleMapper">
+
+	<resultMap type="com.bwf.entity.UserRole" id="userRole">
+		<id column="user_id" property="userId"/>
+		<result column="role_id" property="roleId"/>
+	</resultMap>
+	
+	<!-- 根据userId查询roleId -->
+	<select id="getroleIdByUserId" parameterType="int" resultMap="userRole">
+		select * from user_role where user_id=#{userId}
+	</select>
+	
+</mapper>

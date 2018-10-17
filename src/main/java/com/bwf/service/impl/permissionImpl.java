@@ -3,6 +3,8 @@ package com.bwf.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,14 @@ public class permissionImpl implements IPermission {
 			list.add(p.getPermissionId());
 		}
 		return list;
+	}
+	@Transactional
+	@Override
+	public void updatePermision(Integer roleId, Integer[] permissionId) {
+		//删除原来的权限
+		permissionMapper.deletePermissionByRoleId(roleId);
+		//添加新的权限
+		permissionMapper.insertPermission(roleId,permissionId);
 	}
 
 }

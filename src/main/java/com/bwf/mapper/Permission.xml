@@ -23,14 +23,14 @@
 		where role_permission.role_id = #{roleId}
 	</select>
 	
-	<delete id="deletePermissionsByRoleId" parameterType="int">
+	<delete id="deletePermissionByRoleId" parameterType="int">
 		delete from role_permission where role_id = #{roleId}
 	</delete>
 	
-	<insert id="addPermissions">
+	<insert id="insertPermission">
 		insert into role_permission ( role_id , permission_id ) values
-		<foreach collection="permissionIds" item="permissionId" separator="," close=";">
-			( #{roleId} , #{permissionId} ) 
+		<foreach collection="permissionId" item="Id" separator="," close=";">
+			( #{roleId} , #{Id} ) 
 		</foreach>
 	</insert>
 

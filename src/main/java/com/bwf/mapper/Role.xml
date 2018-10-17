@@ -14,11 +14,50 @@
 		</association>
 
 	</resultMap>
+	<select id="getRoleByRoleId" parameterType="int" resultMap="role">
+		select * from role where role_id=#{roleId}
+	</select>
 	
+	<!-- 获取所有role，联表deportment -->
 	<select id="getAllRole" resultMap="role">
 		select * from role left outer join department on 
 		role.department_id = department.department_id
 	</select>
-
-
+	
+	<!-- 获取指定用户的角色 -->
+	<select id="getRoleById" parameterType="int" resultMap="role">
+		select role.* from user
+		inner join user_role on user.user_id=user_role.user_id
+		inner join role on role.role_id=user_role.role_id
+		where user.user_id=#{userId}
+	</select>
+	
+	<!-- 添加新角色 -->
+	<insert id="addRole" parameterType="com.bwf.entity.Role" keyProperty="role_id">
+		insert into role values(null,#{roleName},#{departmentId})
+	</insert>
+	
+	
+	<!-- 删除role -->
+	<delete id="deleteRoleByRoleId" >
+		delete from role where role_id in
+			<foreach collection="userRole" separator="," item="role3" open="(" close=")">
+				#{role3.roleId}
+			</foreach>
+	</delete>
+	
+	<!-- 添加多个角色 -->
+	<insert id="addRoles">
+		insert into role values
+			<foreach collection="role"  separator="," item="role1">
+				(null,#{role1.roleName},#{role1.departmentId})
+			</foreach>
+	</insert>
+	<!-- 添加多条user_role -->
+	<insert id="adduserAndRole">
+		insert into user_role values
+			<foreach collection="role"  separator="," item="role2">
+				(#{userId},#{role2.roleId})
+			</foreach>
+	</insert>
 </mapper>

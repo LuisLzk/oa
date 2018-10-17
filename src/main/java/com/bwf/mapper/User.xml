@@ -16,9 +16,7 @@
 		<association property="leader"
 					javaType="com.bwf.entity.User"
 					column="leader_id"
-					select="getUserById"
-		>
-		
+					select="getUserById">
 		</association>
 	</resultMap>
 

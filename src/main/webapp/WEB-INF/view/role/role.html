@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>BWFUIFramework</title>
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/animate.min.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/suport/js/wow.js"></script>
+<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/global.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/Calendar3.js"></script>
+<link rel="stylesheet" href="${rc.contextPath}/suport/css/select2.min.css">
+<script type="text/javascript" src="${rc.contextPath}/suport/js/select2.full.min.js" ></script>
+		
+<script type="text/javascript">
+			$(function(){
+				$('#userId').change(function(){
+					location.href='${rc.contextPath}/role?userId='+$(this).val();
+				});
+				$('#userId').select2();
+				
+				//添加角色
+				$('#addRole').click(function(){
+					location.href='${rc.contextPath}/addRole';
+				});
+				
+				//删除角色
+				$('#updateRole').click(function(){
+					var url='${rc.contextPath}/updateRole';
+					$('#form1').attr('action',url);
+					$('#form1').submit();
+				});
+			});
+			
+		
+		</script>
+</head>
+<body>
+		<div class="panel-heading">
+			
+			员工信息
+			<div class="btn-group btn-group-sm pull-right">
+			<button id="addRole" type="button" class="btn btn-success">
+				<img src="/oa/suport/img/plus.png" height="16px"/>
+				&nbsp;&nbsp;添加角色
+			</button>
+			</div>
+		</div>
+	
+	
+	<div class="panel-body">
+		<form id="form1" action="" method="get" role="form">
+			<!-- 员工 -->
+			&nbsp;&nbsp; 员工昵称：
+			<br/><br/>
+			<select id="userId" name="userId" class="form-control">
+				<option value="-1">-- 员工昵称 --</option>
+				<#list allUser as user1> <#if user1.userId=userId>
+				<option selected="selected" value="${user1.userId}">${user1.nickName}</option>
+				<#else>
+				<option value="${user1.userId}">${user1.nickName}</option></#if> </#list>
+			</select>
+			<br/><br/>
+
+			<!-- 角色 -->
+			&nbsp;&nbsp; 角色名：
+			<br/><br/>
+			<#list allRole as role1>
+			
+				<#if currentRoleId?seq_contains(role1.roleId)> <label
+					class="btn btn-primary"> <input checked="checked"
+					type="checkbox" name="roleId" value="${role1.roleId}" />${role1.roleName}
+				</label> 
+				<#else> <label class="btn btn-primary"> <input
+					type="checkbox" name="roleId" value="${role1.roleId}" />${role1.roleName}
+				</label> </#if>
+			</#list>
+		</form>
+		<br/><br/>
+		<div class="row row-where">
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+					<button id="updateRole" type="button" class="btn btn-darkgreen form-control">
+						修改角色</button>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+				<button id="deleteRole" type="button" class="btn btn-warning form-control">
+				<img src="/oa/suport/img/7.png" height="16px"/>
+				&nbsp;&nbsp;删除角色
+				</button>
+				</div>
+			</div>
+	</div>
+		
+	<div style="height: 80px;"></div>
+	</body>
+</html>

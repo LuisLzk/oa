@@ -14,7 +14,7 @@ public class Department {
 	//部门领导
 	private User leader;
 	//部门成员
-	private User user;
+	private User users;
 	
 	
 	public User getLeader() {
@@ -24,10 +24,10 @@ public class Department {
 		this.leader = leader;
 	}
 	public User getUser() {
-		return user;
+		return users;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(User users) {
+		this.users = users;
 	}
 	public Integer getDepartmentId() {
 		return departmentId;

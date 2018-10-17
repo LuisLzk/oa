@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>BWFUIFramework</title>
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/animate.min.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/suport/js/wow.js"></script>
+<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/global.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/Calendar3.js"></script>
+<link rel="stylesheet" href="${rc.contextPath}/suport/css/select2.min.css">
+<script type="text/javascript" src="${rc.contextPath}/suport/js/select2.full.min.js" ></script>
+		
+
+</head>
+<body>
+	<div class="panel-body">
+		<div class="panel-heading">
+			<button onclick="history.back();" type="button" class="btn btn-default btn-back btn-sm"> 返 回 </button>&nbsp;&nbsp;添加角色
+		</div>
+		<form action="${rc.contextPath}/doAddRole" method="POST" role="form">
+			<br/><br/>
+			&nbsp;&nbsp; 角色名：
+			<input name="roleName" type="text" class="form-control" placeholder="请输入角色名" />
+			<br/><br/>
+			&nbsp;&nbsp; 部门名称：
+			<br/><br/>
+			<select name="departmentId" class="form-control">
+				<option value="-1">-- 部门 --</option>
+				<#list deportment as deportment1> 
+					<option value="${deportment1.departmentId}">${deportment1.departmentName}</option>
+				</#list>
+			</select>
+			<br/><br/>
+			<div class="row row-where">
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+					<button type="submit" class="btn btn-darkgreen form-control">
+						确定</button>
+				</div>
+			</div>
+		</form>
+			<br/><br/>
+	<div style="height: 80px;"></div>
+	</body>
+</html>

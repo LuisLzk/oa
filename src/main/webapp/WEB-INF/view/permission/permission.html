@@ -55,12 +55,12 @@
 						<#if permission1.pId=null> 
 						<div class="form-control" style="height:80px;">
 							<#if permissionIds?seq_contains(permission1.permissionId)> 
-								<label class="btn btn-default"> 
+								<label class="btn btn-primary"> 
 									<input checked="checked" type="checkbox" name="permissionId"
 										value="${permission1.permissionId}" />${permission1.permissionName}
 								</label> <br/>
 							<#else> 
-								<label class="btn btn-default"> 
+								<label class="btn btn-primary"> 
 									<input type="checkbox" name="permissionId"
 										value="${permission1.permissionId}" />${permission1.permissionName}
 								</label> <br/>
@@ -70,12 +70,12 @@
 					<#list allPermission as permission2>
 						<#if permission2.pId=permission1.permissionId> 
 							<#if permissionIds?seq_contains(permission1.permissionId)> 
-								<label class="btn btn-default"> 
+								<label class="btn btn-success"> 
 									<input checked="checked" type="checkbox" name="permissionId"
 										value="${permission2.permissionId}" />${permission2.permissionName}
 								</label>
 							<#else> 
-								<label class="btn btn-default"> 
+								<label class="btn btn-success"> 
 									<input type="checkbox" name="permissionId"
 										value="${permission2.permissionId}" />${permission2.permissionName}
 								</label>

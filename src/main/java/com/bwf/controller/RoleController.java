@@ -58,26 +58,27 @@ public class RoleController {
 	@PostMapping("doAddRole")
 	public String doAddRole(Role role){
 		roleService.addRole(role);
-		return "role/addRole";
+		return "redirect:addRole";
 	}
 	
 	
 	//修改角色
-	@GetMapping("updateRole")
+	@PostMapping("updateRole")
 	public String updateRole(Integer userId,Integer[] roleId){
 		
 		List<Role>role = new ArrayList<>();
 		
-//		for(Integer id:roleId){
-//			role=roleService.getroleByRoleId(id); 
-//		}
 		for(int i=0;i<roleId.length;i++){
 			role.addAll( roleService.getroleByRoleId(roleId[i]));
 		}
-		for(Role r:role){
-			System.out.println(r.toString());
-		}
 		roleService.updateRole(userId,role);
+		return "redirect:role";
+	}
+	
+	//删除角色
+	@PostMapping("deleteRole")
+	public String deleteRole(Integer[] roleId){
+		roleService.deleteRoleByRoleId(roleId);
 		return "redirect:role";
 	}
 }

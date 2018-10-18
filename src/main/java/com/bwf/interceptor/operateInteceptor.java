@@ -17,17 +17,16 @@ public class operateInteceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println(request.getRequestURI());
 		
 			boolean sessionContainsUrl=false;
 			User user=(User)request.getSession().getAttribute("user");
 			for(Operate operate:user.getOperates()){
-				System.out.println(operate.getOperateAction());
+				
 				if(request.getRequestURI().contains(operate.getOperateAction())){
 					sessionContainsUrl=true;
 				}
 			}
-			System.out.println(sessionContainsUrl);
+	
 			//判断用户的session.user.operate中是否含有本次操作的权限
 			if(sessionContainsUrl){
 				//含有本次操作的权限，即允许本次操作

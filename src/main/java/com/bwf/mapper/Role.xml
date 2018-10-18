@@ -33,7 +33,7 @@
 	</select>
 	
 	<!-- 添加新角色 -->
-	<insert id="addRole" parameterType="com.bwf.entity.Role" keyProperty="role_id">
+	<insert id="addRole" parameterType="com.bwf.entity.Role" keyProperty="roleId">
 		insert into role values(null,#{roleName},#{departmentId})
 	</insert>
 	
@@ -41,13 +41,13 @@
 	<!-- 删除role -->
 	<delete id="deleteRoleByRoleId" >
 		delete from role where role_id in
-			<foreach collection="userRole" separator="," item="role3" open="(" close=")">
-				#{role3.roleId}
+			<foreach collection="roleId" separator="," item="id" open="(" close=")">
+				#{id}
 			</foreach>
 	</delete>
 	
 	<!-- 添加多个角色 -->
-	<insert id="addRoles">
+	<insert id="addRoles" parameterType="com.bwf.entity.Role" useGeneratedKeys="true" keyProperty="roleId">
 		insert into role values
 			<foreach collection="role"  separator="," item="role1">
 				(null,#{role1.roleName},#{role1.departmentId})

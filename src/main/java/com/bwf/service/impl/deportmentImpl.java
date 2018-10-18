@@ -19,4 +19,5 @@ public class deportmentImpl implements IDeportmentService {
 		return deportmentMapper.getAllDeportment();
 	}
 
+	
 }

@@ -79,5 +79,10 @@ public class userServiceImpl implements IuserService {
 			 userMapper.updatewithoutPassword(user);
 		}
 	}
+	@Override
+	public String getNickeNameByUserId(Integer pId) {
+		// TODO Auto-generated method stub
+		return userMapper.getNickeNameByUserId(pId);
+	}
 	
 }

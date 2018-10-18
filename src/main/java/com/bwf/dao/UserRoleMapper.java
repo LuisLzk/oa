@@ -10,4 +10,6 @@ public interface UserRoleMapper {
 
 	List<UserRole> getroleIdByUserId(@Param("userId")Integer userId);
 
+	void deleteByUserId(@Param("userId")Integer userId);
+
 }

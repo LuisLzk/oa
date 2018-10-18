@@ -32,9 +32,16 @@
 					location.href='${rc.contextPath}/addRole';
 				});
 				
-				//删除角色
+				//修改角色
 				$('#updateRole').click(function(){
 					var url='${rc.contextPath}/updateRole';
+					$('#form1').attr('action',url);
+					$('#form1').submit();
+				});
+				
+				//删除角色
+				$('#deleteRole').click(function(){
+					var url='${rc.contextPath}/deleteRole';
 					$('#form1').attr('action',url);
 					$('#form1').submit();
 				});
@@ -57,7 +64,7 @@
 	
 	
 	<div class="panel-body">
-		<form id="form1" action="" method="get" role="form">
+		<form id="form1" action="" method="post" role="form">
 			<!-- 员工 -->
 			&nbsp;&nbsp; 员工昵称：
 			<br/><br/>

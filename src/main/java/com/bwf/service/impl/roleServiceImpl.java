@@ -3,6 +3,8 @@ package com.bwf.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,17 +65,29 @@ public class roleServiceImpl implements IRoleService {
 
 
 	@Override
+	@Transactional
 	public void updateRole(Integer userId, List<Role> role) {
-		//删除原来的角色
-		List<UserRole> userRole=userRoleMapper.getroleIdByUserId(userId);
-		for(UserRole u:userRole){
-			System.out.println(u.toString());
+		//删除原来的角色关系
+		List<UserRole> roleIds=userRoleMapper.getroleIdByUserId(userId);
+		System.out.println(roleIds.size());
+		List<Integer> roleId=new ArrayList<>();
+		for(int i=0;i<roleIds.size();i++){
+			roleId.add(roleIds.get(i).getRoleId());
 		}
-		roleMapper.deleteRoleByRoleId(userRole);;
-		//添加新的角色
-		List<Integer> list= roleMapper.addRoles(role);
-		
+		if(roleIds.size()>0){
+			userRoleMapper.deleteByUserId(userId);
+			//roleMapper.deleteRoleByRoleId(roleId);
+		}
+		//添加新的角色关系
 		roleMapper.adduserAndRole(userId,role);
+	}
+
+
+
+	@Override
+	public void deleteRoleByRoleId(Integer[] roleId) {
+		// TODO Auto-generated method stub
+		roleMapper.deleteRoleByRoleId(roleId);
 	}
 
 

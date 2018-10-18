@@ -41,6 +41,16 @@ public class Role {
 	public String toString() {
 		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", departmentId=" + departmentId + "]";
 	}
+	public Role(Integer roleId, String roleName, Integer departmentId) {
+		super();
+		this.roleId = roleId;
+		this.roleName = roleName;
+		this.departmentId = departmentId;
+	}
+	public Role() {
+		super();
+	}
+	
 	
 	
 }

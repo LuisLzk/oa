@@ -8,4 +8,5 @@ public interface DeportmentMapper {
 
 	List<Department> getAllDeportment();
 
+
 }

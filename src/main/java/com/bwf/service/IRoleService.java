@@ -18,4 +18,6 @@ public interface IRoleService {
 
 	List<Role> getroleByRoleId(Integer id);
 
+	void deleteRoleByRoleId(Integer[] roleId);
+
 }

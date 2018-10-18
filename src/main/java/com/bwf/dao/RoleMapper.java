@@ -17,11 +17,11 @@ public interface RoleMapper {
 
 	List<Role> getRoleByRoleId(@Param("roleId")Integer id);
 
-	List<Integer> addRoles(@Param("role")List<Role> role);
+	Integer addRoles(@Param("role")List<Role> role);
 
 	Integer getroleIdByUserId(@Param("userId")Integer userId);
 
-	void deleteRoleByRoleId(@Param("userRole")List<UserRole> userRole);
+	void deleteRoleByRoleId(@Param("roleId")Integer[] roleId);
 
 	void adduserAndRole(@Param("userId")Integer userId, @Param("role")List<Role> role);
 

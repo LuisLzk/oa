@@ -31,5 +31,7 @@ public interface UserMapper {
 
 	void updatewithoutPassword(User user);
 
+	String getNickeNameByUserId(@Param("pId")Integer pId);
+
 	
 }

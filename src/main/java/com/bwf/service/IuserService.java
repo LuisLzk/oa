@@ -26,6 +26,8 @@ public interface IuserService {
 
 	void updateUser(User user, boolean b);
 
+	String getNickeNameByUserId(Integer getpId);
+
 	
 	
 

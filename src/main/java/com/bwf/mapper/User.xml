@@ -118,9 +118,10 @@
     	where user_id = #{userId}
     </update>
     
-    
-    
-    
+    <!-- 根据pid获取leader -->
+    <select id="getNickeNameByUserId" parameterType="int" resultMap="simpleUser">
+        select nick_name from `user` where user_id = #{pId}
+    </select>
     
 
 </mapper>

@@ -84,5 +84,10 @@ public class userServiceImpl implements IuserService {
 		// TODO Auto-generated method stub
 		return userMapper.getNickeNameByUserId(pId);
 	}
+	@Override
+	public List<User> getUsersById(Integer userId) {
+		// TODO Auto-generated method stub
+		return userMapper.getUsersById(userId);
+	}
 	
 }

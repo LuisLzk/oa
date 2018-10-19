@@ -28,6 +28,8 @@ public interface IuserService {
 
 	String getNickeNameByUserId(Integer getpId);
 
+	List<User> getUsersById(Integer userId);
+
 	
 	
 

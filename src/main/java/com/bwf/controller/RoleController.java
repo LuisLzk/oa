@@ -67,9 +67,12 @@ public class RoleController {
 	public String updateRole(Integer userId,Integer[] roleId){
 		
 		List<Role>role = new ArrayList<>();
-		
+		if(userId!=null&&roleId!=null){
 		for(int i=0;i<roleId.length;i++){
 			role.addAll( roleService.getroleByRoleId(roleId[i]));
+		}
+		}else{
+			return "redirect:role";
 		}
 		roleService.updateRole(userId,role);
 		return "redirect:role";

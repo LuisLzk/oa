@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>BWFUIFramework</title>
+		<link rel="stylesheet" href="/oa/suport/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/oa/suport/css/animate.min.css" />
+		<script type="text/javascript" src="/oa/suport/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="/oa/suport/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="/oa/suport/js/wow.js" ></script>
+		<link rel="stylesheet" href="/oa/suport/css/global.css" />
+		<script type="text/javascript" src="/oa/suport/js/global.js" ></script>
+		<link rel="stylesheet" href="/oa/suport/css/select2.min.css">
+		<script type="text/javascript" src="/oa/suport/js/select2.full.min.js" ></script>
+	</head>
+	
+	<body>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<button onclick="history.back();" type="button" class="btn btn-default btn-back btn-sm"> 返 回 </button>&nbsp;&nbsp;添加部门
+			</div>
+			<div class="panel-body">
+				<form action="${rc.contextPath}/doAddDepartment" method="POST" role="form">
+					部门名称：
+					<input type="text" name="departmentName" class="form-control"  placeholder="例如：销售部"/>
+					
+					选择上级部门：
+					<select name="pId" class="form-control">
+						<option value="-1">-- 请选择上级部门 --</option>
+						<#list department as department1>
+							<option value="${department1.departmentId}">${department1.departmentName}</option>
+						</#list>	
+					</select>
+					选择部门负责人：
+					<select name="userId" class="form-control">
+						<option value="-1">-- 请选择本部门负责人 --</option>
+						<#list allDepartmentUser as user1>
+							<option value="${user1.userId}">${user1.nickName}</option>
+						</#list>	
+					</select>
+					
+					<input type="submit" class="btn btn-danger form-control" value="提交表单 "> 
+				
+				</form>
+			</div>
+		</div>
+		<div style="height: 80px;"></div>
+	</body>
+</html>

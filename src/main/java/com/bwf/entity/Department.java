@@ -58,6 +58,9 @@ public class Department {
 		return "Department [departmentId=" + departmentId + ", departmentName=" + departmentName + ", pId=" + pId
 				+ ", userId=" + userId + "]";
 	}
+	public Department() {
+		super();
+	}
 	
 	
 }

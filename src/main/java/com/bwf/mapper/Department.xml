@@ -24,5 +24,35 @@
 	<select id="getAllDeportment" resultMap="department">
 		select * from department
 	</select>
-
+	<!-- 获取部门领导 -->
+	<select id="getDepartmentLeaderByDepartmentId" parameterType="int" resultMap="department">
+		select user.nick_name,department.* from department inner join user on department.user_id=user.user_id
+		where department.department_id=#{departmentId}
+	</select>
+	<!-- 获取所有下属部门 -->
+	<select id="getAllDeportmentByPId" parameterType="int" resultMap="department">
+		select * from department where pid=#{departmentId}
+	</select>
+	
+	<select id="getDeportmentByPId" parameterType="int" resultMap="department">
+		select * from department where department_id=#{pId}
+	</select>
+	
+	<!-- 添加部门 -->
+	<insert id="addDepartment" parameterType="com.bwf.entity.Department">
+		insert into department values(null,#{departmentName},#{pId},#{userId})
+	</insert>
+	
+	<!-- 删除部门 -->
+	<delete id="deleteDepartmentByDepartmentId">
+		delete from department where department_id in
+    	<foreach collection="departmentId" open="(" close=")" separator="," item="id">
+    		#{id}
+    	</foreach>
+	</delete>
+	
+	<!-- 删除单个部门 -->
+	<delete id="deleteDepartmentBySimgleDepartmentId" parameterType="int">
+		delete from department where department_id =#{id}
+	</delete>
 </mapper>

@@ -33,5 +33,7 @@ public interface UserMapper {
 
 	String getNickeNameByUserId(@Param("pId")Integer pId);
 
+	List<User> getUsersById(Integer userId);
+
 	
 }

@@ -18,32 +18,46 @@
 <script type="text/javascript"
 	src="${rc.contextPath}/suport/js/Calendar3.js"></script>
 <script type="text/javascript">
-			$(function(){
-				$('.showDepartment').click(function(){
-					location.href='${rc.contextPath}/departmentShow?departmentId='+$(this).val();
-				});
-			
-			});
-			
+	
+	$(function(){
+		//展示部门详情
+		$('.showDepartment').click(function(){
+			location.href='${rc.contextPath}/departmentShow?departmentId='+$(this).val();
+		});
 		
-		</script>
+		//添加部门
+		$('#addDepartment').click(function(){
+			location.href='${rc.contextPath}/addDepartment';
+		});
+		
+		//删除部门
+		$('#deleteDepartment').click(function(){
+			location.href='${rc.contextPath}/deleteDepartment';
+		});
+		
+		//修改部门
+		$('#updateDepartment').click(function(){
+			location.href='${rc.contextPath}/updateDepartment';
+		});
+	});
+	</script>
 </head>
 <body>
 	<div class="row row-where">
 		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
-			<button id="updateRole" type="button" class="btn btn-warning">
+			<button id="updateDepartment" type="button" class="btn btn-warning">
 			修改部门</button>
 		</div>
 		
 		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
-		<button id="deleteRole" type="button" class="btn btn-danger ">
+		<button id="deleteDepartment" type="button" class="btn btn-danger ">
 			<img src="/oa/suport/img/7.png" height="16px"/>
 			&nbsp;&nbsp;删除部门
 		</button>
 		</div>
 		
 		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
-		<button id="addRole" type="button" class="btn btn-success ">
+		<button id="addDepartment" type="button" class="btn btn-success ">
 			<img src="/oa/suport/img/plus.png" height="16px"/>
 			&nbsp;&nbsp;添加部门
 		</button>

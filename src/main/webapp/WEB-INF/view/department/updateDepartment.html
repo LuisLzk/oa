@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>BWFUIFramework</title>
+<link rel="stylesheet"
+	href="/oa/suport/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="/oa/suport/css/animate.min.css" />
+<script type="text/javascript"
+	src="/oa/suport/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/oa/suport/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/oa/suport/js/wow.js"></script>
+<link rel="stylesheet" href="/oa/suport/css/global.css" />
+<script type="text/javascript"
+	src="/oa/suport/js/global.js"></script>
+<script type="text/javascript"
+	src="/oa/suport/js/Calendar3.js"></script>
+<script type="text/javascript">
+			$(function(){
+				$("#departmentId").change(function(){
+					location.href='${rc.contextPath}/updateDepartment?departmentId='+$(this).val();
+				});
+				
+			
+			});
+			
+		
+		</script>
+</head>
+<body>
+	<div class="panel-heading">
+		<button onclick="history.back();" type="button" class="btn btn-default btn-back btn-sm">
+			返 回</button>
+		&nbsp;&nbsp; 修改部门
+	</div>
+	<div class="panel-body">
+		<form action="${rc.contextPath}/doUpdateDepartment" method="POST" role="form">
+			
+			<!-- 角色 -->
+			请选择需要修改的部门：
+			<br /> <br />
+			<select id="departmentId" class="form-control">
+				<option value="-1">-- 部门名称 --</option>
+				<#list allDepartment as department1>
+					<option value="${department1.departmentId}">${department1.departmentName}</option>
+				</#list>	
+			</select>
+			<br /> <br />
+			<div class="panel-body panel-step-body">
+				<table style="text-align:center;" class="table table-bordered table-responsive table-condensed">
+				<tr>
+					<td>当前部门</td>
+					<td>
+						<input name="departmentId" type="hidden" class="form-control" value="${leader.departmentId}" />
+						<input type="text" name="departmentName" class="form-control" value="${leader.departmentName}" />
+					</td>
+				</tr>
+				<tr>
+					<td>部门负责人</td>
+					<td>
+						<input name="userId"  type="hidden" class="form-control" value="${leader.user.userId}" />
+						<input  type="text" class="form-control" value="${leader.user.nickName}" />
+					</td>
+				</tr>
+				<tr>
+					<td>上级部门</td>
+					<td>
+						<input name="pId" type="hidden" class="form-control" value="${allPrevDepartments.departmentId}" />
+						<input type="text" class="form-control" value="${allPrevDepartments.departmentName}" />
+					</td>
+				</tr>
+				<tr>
+					<td>上级部门负责人</td>
+					<td>
+						<input readonly="readonly" type="text" class="form-control" value="${prevDepartmentUser.nickName}" />
+					</td>
+				</tr>
+				<tr>
+					<td>下级部门</td>
+					<td>
+					<table class="table table-bordered table-responsive ">
+					
+					<#list allDepartments as nextDepartment>
+						<tr>
+							<td>
+							部门名称
+							</td>
+							<td>
+							<input readonly="readonly" type="text" class="form-control" value="${nextDepartment.departmentName}" />
+							</td>
+						</tr>
+						<#list nextDepartmentUser as nextUser>
+						<#if nextDepartment.userId=nextUser.userId>
+						<tr>
+							<td>
+							部门负责人
+							</td>
+							<td>
+							<input readonly="readonly" type="text" class="form-control" value="${nextUser.nickName}" />
+							</td>
+						</tr>
+						</#if>
+						</#list>
+					</#list>
+					</table>
+					</td>
+				</tr>
+			</table>
+			</div>
+			
+		
+		
+		<br /> <br />
+		<div class="row row-where">
+			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+				<button type="submit" class="btn btn-darkgreen form-control">
+				修改
+				</button>
+			</div>
+		</div>
+		</form>
+		</div>
+		<div style="height: 80px;"></div>
+	</body>
+</html>

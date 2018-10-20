@@ -45,16 +45,16 @@ public class UserController {
 	@PostMapping("doLogin")
 	public String doLogin( User user,HttpSession seesion){
 		//logger.info("{}","{}",user.getUserName(),user.getPassword());
-		System.out.println(user.getUserName()+","+user.getPassword());
+		//System.out.println(user.getUserName()+","+user.getPassword());
 		
 		User us= iuserService.login(user);
 		if(us!=null){
 			//登陆成功
-			logger.info(us.toString());
+			//logger.info(us.toString());
 			List<Menu> menus=us.getMenus();
-			for(Menu m:menus){
-				logger.info(m.toString());
-			}
+//			for(Menu m:menus){
+//				logger.info(m.toString());
+//			}
 			//写入session
 			seesion.setAttribute("user", us);
 			return "redirect:/doLogin";
@@ -104,12 +104,12 @@ public class UserController {
 	@PostMapping("doAdd")
 	public String doAdd(@Valid User us,BindingResult bindingResult,ModelMap modelMap){
 		
-		logger.info(us.getNickName());
-		logger.info(us.getLeader().getUserId()+"");
+		//logger.info(us.getNickName());
+		//logger.info(us.getLeader().getUserId()+"");
 		us.setLeaderId(us.getLeader().getUserId());
 		//检验参数是否合法
 		if(bindingResult.hasErrors()){
-			System.out.println(bindingResult.getAllErrors());
+			//System.out.println(bindingResult.getAllErrors());
 			modelMap.addAttribute("error", bindingResult.getAllErrors());
 			return "redirect:/add";
 		}else{
@@ -122,7 +122,7 @@ public class UserController {
 	@RequestMapping("addUser")
 	@ResponseBody
 	public Integer addUser(HttpServletRequest req){
-		System.out.println(req.getParameter("userName"));
+		//System.out.println(req.getParameter("userName"));
 		User user=iuserService.checkUser(req.getParameter("userName"));
 		if(user!=null){
 			System.out.println("用户名不可用！");
@@ -143,9 +143,9 @@ public class UserController {
 	//删除多个员工
 	@GetMapping("deletUser")
 	public String deletUser(Integer[] userId){
-		for(Integer id:userId){
-			System.out.println(id);
-		}
+//		for(Integer id:userId){
+//			System.out.println(id);
+//		}
 		iuserService.deletUsers(userId);
 		return "redirect:/show";
 	}
@@ -153,9 +153,9 @@ public class UserController {
 	//编辑员工信息
 	@GetMapping("editUser/{userId}")
 	public String editUser(@PathVariable Integer userId,ModelMap modelMap){
-		logger.info(userId+"");
+		//logger.info(userId+"");
 		User user1=iuserService.getUserById(userId);
-		logger.info(user1.toString());
+		//logger.info(user1.toString());
 		List<User>users=iuserService.getAllUser();
 		modelMap.addAttribute("user1", user1);
 		modelMap.addAttribute("users", users);
@@ -163,8 +163,8 @@ public class UserController {
 	}
 	@PostMapping("doEdit")
 	public String doEdit(User user,String resetPassword){
-		logger.info(user.toString());
-		logger.info("是否修改密码：{}", resetPassword!=null);
+		//logger.info(user.toString());
+		//logger.info("是否修改密码：{}", resetPassword!=null);
 		
 		iuserService.updateUser(user,resetPassword!=null);
 		return "redirect:/show";

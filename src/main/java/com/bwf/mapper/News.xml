@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应 dao 中的 接口 -->
+<mapper namespace="com.bwf.dao.NewsMapper">
+
+	<resultMap type="com.bwf.entity.News" id="news">
+		<id column="news_id" property="newsId"/>
+		<result column="news_details" property="newsDetails"/>
+		<result column="user_id" property="userId"/>
+		<result column="news_time" property="time"/>
+		
+		<collection 
+			property="users" 
+			column="user_id" 
+			ofType="com.bwf.entity.User" 
+			resultMap="com.bwf.dao.UserMapper.simpleUser" >
+		</collection>
+	</resultMap>
+	
+	
+	<!-- 获取前十条公告 -->
+	<select id="getNews" resultMap="news">
+		select * from news inner join user on news.user_id=user.user_id 
+		order by news_id DESC limit 0,10
+	</select>
+	
+	<!-- 获取最新的一条公告 -->
+	<select id="getSingleNews" resultMap="news">
+		select * from news inner join user on news.user_id=user.user_id 
+		order by news_id DESC limit 0,1
+	</select>
+	
+	<!-- 添加公告 -->
+	<insert id="addNews">
+		insert into news values(null,#{news.newsDetails},#{news.userId},null)
+	</insert>
+	
+	<!-- 获取钱100条公告公告 -->
+	<select id="getSomeNews" resultMap="news">
+		select * from news inner join user on news.user_id=user.user_id 
+		order by news_id DESC limit 0,100
+	</select>
+	
+	<!-- 删除公告 -->
+	<delete id="deleteNewsByNewsId" parameterType="int">
+		delete from news where news_id=#{newsId} 
+	</delete>
+</mapper>

@@ -45,6 +45,9 @@
 			<select id="departmentId" class="form-control">
 				<option value="-1">-- 部门名称 --</option>
 				<#list allDepartment as department1>
+				<#if department1.departmentId=departmentId>
+					<option selected="selected" value="${department1.departmentId}">${department1.departmentName}</option>
+				</#if>
 					<option value="${department1.departmentId}">${department1.departmentName}</option>
 				</#list>	
 			</select>
@@ -61,21 +64,29 @@
 				<tr>
 					<td>部门负责人</td>
 					<td>
-						<input name="userId"  type="hidden" class="form-control" value="${leader.user.userId}" />
-						<input  type="text" class="form-control" value="${leader.user.nickName}" />
+						<select name="userId" class="form-control">
+							<option value="-1">--部门负责人--</option>
+							<#list allUsers as user1>
+							<#if leader.user.userId=user1.userId>
+							<option selected="selected" value="${user1.userId}">${user1.nickName}</option>
+							</#if>
+							<option value="${user1.userId}">${user1.nickName}</option>
+							</#list>	
+						</select>			
 					</td>
 				</tr>
 				<tr>
 					<td>上级部门</td>
 					<td>
-						<input name="pId" type="hidden" class="form-control" value="${allPrevDepartments.departmentId}" />
-						<input type="text" class="form-control" value="${allPrevDepartments.departmentName}" />
-					</td>
-				</tr>
-				<tr>
-					<td>上级部门负责人</td>
-					<td>
-						<input readonly="readonly" type="text" class="form-control" value="${prevDepartmentUser.nickName}" />
+						<select name="pId" class="form-control">
+							<option value="-1">--上级部门部门--</option>
+							<#list allOfDepartment as departemnt2>
+							<#if allPrevDepartments.departmentId=departemnt2.departmentId>
+							<option selected="selected" value="${departemnt2.departmentId}">${departemnt2.departmentName}</option>
+							</#if>
+							<option value="${departemnt2.departmentId}">${departemnt2.departmentName}</option>
+							</#list>	
+						</select>			
 					</td>
 				</tr>
 				<tr>

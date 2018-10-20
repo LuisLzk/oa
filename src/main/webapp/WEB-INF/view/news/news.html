@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>BWFUIFramework</title>
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/animate.min.css" />
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/wow.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/global.js" ></script>
+	</head>
+		<script type="text/javascript">
+			$(function(){
+				$('#addNews').click(function(){
+					location.href='${rc.contextPath}/addNews';
+				});
+				
+				//删除公告
+				$('#deleteNews').click(function(){
+					location.href='${rc.contextPath}/deleteNews';
+				});
+			});
+		</script>
+	
+	<body>
+		<div class="row row-where">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+		<button id="deleteNews" type="button" class="btn btn-danger ">
+			<img src="/oa/suport/img/7.png" height="16px"/>
+			&nbsp;&nbsp;删除公告
+		</button>
+		</div>
+		
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+		<button id="addNews" type="button" class="btn btn-success ">
+			<img src="/oa/suport/img/plus.png" height="16px"/>
+			&nbsp;&nbsp;添加公告
+		</button>
+		</div>
+		</div>
+		
+		<br/><br/>
+		<div class="panel panel-default">
+			<div class="panel-body">
+					最新公告：
+					<div class="panel-body panel-step-body">
+						<table style="text-align:center;" class="table table-bordered table-responsive table-condensed">
+						<tr>
+							<td>公告内容</td>
+							<td>公告发布人</td>
+							<td>发布时间</td>
+						</tr>
+						<#list allNews as news1>
+						<tr>
+							<td>${news1.newsDetails}</td>
+							<td>${news1.users.nickName}</td>
+							<td>${news1.newTime}</td>
+						</tr>
+						</#list>
+					</table>
+					</div>
+				</div>
+			</div>
+	</body>
+</html>
+

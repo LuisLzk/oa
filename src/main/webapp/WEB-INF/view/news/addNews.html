@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>BWFUIFramework</title>
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/animate.min.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/suport/js/wow.js"></script>
+<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/global.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/Calendar3.js"></script>
+<link rel="stylesheet" href="${rc.contextPath}/suport/css/select2.min.css">
+<script type="text/javascript" src="${rc.contextPath}/suport/js/select2.full.min.js" ></script>
+		
+</head>
+<script type="text/javascript">
+	$(function(){
+		$('#newsDetails').keyup(function(){
+			$('#span').html($('#newsDetails').val().length);
+			var length=$('#span').html();
+			
+			if(length>50){
+				$('#span').attr('color','red');
+				$('#newsDetails').val($('#newsDetails').val().substring(0, 49));
+				$('#span').html(50);
+			}
+			
+		});
+	});
+</script>
+
+<body>
+	<div class="panel-body">
+		<div class="panel-heading">
+			<button onclick="history.back();" type="button" class="btn btn-default btn-back btn-sm"> 返 回 </button>&nbsp;&nbsp;添加公告
+		</div>
+		<form action="${rc.contextPath}/doAddNews" method="POST" role="form">
+			<br/><br/>
+			&nbsp;&nbsp; 公告内容：
+			<br/>
+			<textarea id="newsDetails" name="newsDetails" class="form-control" placeholder="不得超过50个字"></textarea>
+			<span><span id="span">0</span>/50</span>
+			<br/><br/>
+			
+			<div class="row row-where">
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+					<button type="submit" class="btn btn-darkgreen form-control">
+						发布公告</button>
+				</div>
+			</div>
+		</form>
+			<br/><br/>
+	<div style="height: 80px;"></div>
+	</body>
+</html>

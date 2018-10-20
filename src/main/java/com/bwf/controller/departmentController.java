@@ -114,20 +114,28 @@ public class departmentController {
 			prevDepartmentUser=userService.getUserById(allPrevDepartments.getUserId());
 		}
 		
-		
+		modelMap.addAttribute("departmentId", departmentId);
 		modelMap.addAttribute("leader", leader);
 		modelMap.addAttribute("allDepartments", allDepartments);
 		modelMap.addAttribute("nextDepartmentUser", nextDepartmentUser);
 		modelMap.addAttribute("allPrevDepartments", allPrevDepartments);
 		modelMap.addAttribute("prevDepartmentUser", prevDepartmentUser);
 		}
+		
+		//所用用户
+		List<User> allUsers=userService.getAllUser();
+		//所有部门
+		List<Department> allOfDepartment=departmentService.getAllDeportment();
+		
 		modelMap.addAttribute("allDepartment", allDepartment);
+		modelMap.addAttribute("allUsers", allUsers);
+		modelMap.addAttribute("allOfDepartment", allOfDepartment);
 		return "department/updateDepartment";
 	}
 	@PostMapping("doUpdateDepartment")
 	public String doUpdateDepartment(Department department){
-		System.out.println(department);
+		//System.out.println(department);
 		departmentService.updateDepartment(department);
-		return null;
+		return "redirect:/updateDepartment";
 	}
 }

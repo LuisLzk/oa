@@ -38,6 +38,8 @@
 		<form action="${rc.contextPath}/doPermission" method="POST" role="form">
 			
 			<!-- 角色 -->
+			请选择需要修改或删除权限的角色：
+			<br/><br/>
 			<select id="roleId" name="roleId" class="form-control">
 				<option value="-1">-- 角色 --</option>
 				<#list role as role1>
@@ -48,8 +50,10 @@
 					</#if>
 			 	</#list>
 			</select>
-
+			<br/><br/>
 			<!-- 一级权限 -->
+			权限：
+			<br/><br/>
 			<#list allPermission as permission1> 
 				<#if permission1.pId=null> 
 				<div class="form-control" style="height:80px;">

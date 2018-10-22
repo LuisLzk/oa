@@ -81,7 +81,9 @@ public class RoleController {
 	//删除角色
 	@PostMapping("deleteRole")
 	public String deleteRole(Integer[] roleId){
+		if(roleId!=null){
 		roleService.deleteRoleByRoleId(roleId);
+		}
 		return "redirect:role";
 	}
 }

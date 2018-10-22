@@ -146,7 +146,11 @@ public class UserController {
 //		for(Integer id:userId){
 //			System.out.println(id);
 //		}
+		if(userId!=null){
 		iuserService.deletUsers(userId);
+		}else{
+			return "redirect:/show";
+		}
 		return "redirect:/show";
 	}
 	

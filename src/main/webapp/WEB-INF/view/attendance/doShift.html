@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>BWFUIFramework</title>
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/animate.min.css" />
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/jquery.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/wow.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/global.js" ></script>
+		<link rel="stylesheet" href="${rc.contextPath}/suport/css/select2.min.css">
+		<script type="text/javascript" src="${rc.contextPath}/suport/js/select2.full.min.js" ></script>
+	</head>
+	
+	<script type="text/javascript">
+		$(function(){
+			var ok1=false;
+			var ok2=false;
+			var ok3=false;
+			
+			
+			
+			//确认班次名称
+			$('#shiftName').blur(function(){
+				//2到4位的汉字
+				var value=/^[\u4e00-\u9fa5]{2,4}$/
+				$('#shiftSpan').remove();
+				if(value.test($('#shiftName').val())){
+					$('#shiftName').before('<span id="shiftSpan" class="span" style="color:green;">✔</span>');
+					ok1=true;
+				}else{
+					$('#shiftName').before('<span id="shiftSpan" class="span" style="color:red;">✖ 班次名称输入有误，请重新输入</span>');
+				}
+			});
+			//确认开始时间
+			$('#startTime').blur(function(){
+				//2到4位的汉字
+				var value= /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])\s+(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/
+				$('#startSpan').remove();
+				if(value.test($('#startTime').val())){
+					$('#startTime').before('<span id="startSpan" class="span" style="color:green;">✔</span>');
+					ok2=true;
+				}else{
+					$('#startTime').before('<span id="startSpan" class="span" style="color:red;">✖ 时间输入有误，请重新输入</span>');
+				}
+			});
+			//确认结束时间
+			$('#endTime').blur(function(){
+				//2到4位的汉字
+				var value= /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])\s+(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/
+				$('#endSpan').remove();
+				if(value.test($('#endTime').val())){
+					$('#endTime').before('<span id="endSpan" class="span" style="color:green;">✔</span>');
+					ok3=true;
+				}else{
+					$('#endTime').before('<span id="endSpan" class="span" style="color:red;">✖ 时间输入有误，请重新输入</span>');
+				}
+			});
+				
+			//确认提交
+			$('#submitButton').click(function(){
+				if(ok1&&ok2&&ok3){
+					$('#myModalLabel').html('提交成功！')
+					$('#errorMessage').html('提交成功！')
+					//显示错误信息的虚拟按钮
+					$('#openModal').trigger('click');
+					$('#doSubmit').submit();
+				}else{
+					$('#errorMessage').html('你有信息尚未完善！')
+					//显示错误信息的虚拟按钮
+					$('#openModal').trigger('click');
+				}
+			});
+			
+			if(location.href.indexOf('error')!=-1){
+				$('#myModalLabel').html('提交失败！')
+				$('#errorMessage').html(${error})
+				//显示错误信息的虚拟按钮
+				$('#openModal').trigger('click');
+			
+			}
+			
+		});
+		
+		
+	</script>
+	<body>
+		
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<button onclick="history.back();" type="button" class="btn btn-default btn-back btn-sm"> 返 回 </button>&nbsp;&nbsp;添加用户
+				</div>
+				<div class="panel-body">
+					<form id="doSubmit" action="${rc.contextPath}/doAddShift" method="POST" role="form">
+						班次名称：
+						<input id="shiftName" type="text" name="shiftName" class="form-control"  placeholder="例如：早班"/>
+						本班次开始时间：
+						<input id="startTime" type="text" name="shiftStartTime" class="form-control" placeholder="2018-10-22 18：06：30" />
+						
+						本班次结束时间：
+						<input id="endTime" type="text" name="shiftEndTime" class="form-control" placeholder="2018-10-22 18：06：30" />
+						
+						
+						<input id="submitButton" type="button" class="btn btn-danger form-control" value="提交 "> 
+					
+					</form>
+				</div>
+			</div>
+			
+			<!-- 按钮触发模态框 -->
+	<input id="openModal" type="hidden" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"/>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">提交失败！</h4>
+	            </div>
+	            <div id="errorMessage" class="modal-body">错误信息！</div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+	            </div>
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal -->
+	</div>	
+
+		<div style="height: 80px;"></div>
+	</body>
+</html>

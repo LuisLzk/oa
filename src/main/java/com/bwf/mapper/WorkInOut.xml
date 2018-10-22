@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应 dao 中的 接口 -->
+<mapper namespace="com.bwf.dao.WorkInOutMapper">
+
+	<resultMap type="com.bwf.entity.WorkInOut" id="workInOut">
+		<id column="work_in_out_id" property="workInOutId"/>
+		<result column="user_id" property="userId"/>
+		<result column="in_time" property="inTime"/>
+		<result column="out_time" property="outTime"/>
+		
+	</resultMap>
+	
+	
+	<!-- 上班签到 -->
+	<insert id="workIn" parameterType="com.bwf.entity.WorkInOut">
+		insert into work_in_out values(null,#{userId},#{inTime},null)
+	</insert>
+	<!-- 下班签退 -->
+	<insert id="workOut" parameterType="com.bwf.entity.WorkInOut">
+		insert into work_in_out values(null,#{userId},null,#{outTime})
+	</insert>
+</mapper>

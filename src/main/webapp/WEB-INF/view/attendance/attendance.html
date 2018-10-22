@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>BWFUIFramework</title>
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${rc.contextPath}/suport/css/animate.min.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${rc.contextPath}/suport/js/wow.js"></script>
+<link rel="stylesheet" href="${rc.contextPath}/suport/css/global.css" />
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/global.js"></script>
+<script type="text/javascript"
+	src="${rc.contextPath}/suport/js/Calendar3.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		//上班签到
+		$('#workIn').click(function(){
+			var myDate = new Date();
+			//获取当前年
+			var year=myDate.getFullYear();
+			//获取当前月
+			var month=myDate.getMonth()+1;
+			//获取当前日
+			var date=myDate.getDate(); 
+			var h=myDate.getHours();       //获取当前小时数(0-23)
+			var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+			var s=myDate.getSeconds();  
+			
+			var now=year+'-'+month+'-'+date+' '+h+':'+m+':'+s;
+			location.href='${rc.contextPath}/attendance?inTime='+now;
+		});
+		
+		//下班签退
+		$('#workOut').click(function(){
+			var myDate1 = new Date();
+			var year1=myDate1.getFullYear();
+			var month1=myDate1.getMonth()+1;
+			var date1=myDate1.getDate(); 
+			var h1=myDate1.getHours();       
+			var m1=myDate1.getMinutes();     
+			var s1=myDate1.getSeconds();  
+			
+			var now1=year1+'-'+month1+'-'+date1+' '+h1+':'+m1+':'+s1;
+			location.href='${rc.contextPath}/attendance?outTime='+now1;
+		});
+		
+		//排班
+		$('#addShift').click(function(){
+			location.href='${rc.contextPath}/addShift';
+		});
+	});
+	</script>
+</head>
+<body>
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		考勤管理
+		<div class=" pull-right">
+			<button id="workIn" type="button" class="btn btn-success">
+				签到
+			</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button id="workOut" type="button" class="btn btn-danger">
+				签退
+			</button>
+		</div>
+		<br/><br/>
+	</div>
+	<div class="panel-heading">
+		<div class="row row-where">
+			&nbsp;&nbsp;&nbsp;
+			<button id="addShift" type="button" class="btn btn-warning">
+			创建班次</button>
+		
+			&nbsp;&nbsp;&nbsp;
+			<button id="doRoster" type="button" class="btn btn-warning">
+			排班</button>
+		
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button id="updateDepartment" type="button" class="btn btn-warning">
+			加班</button>
+		
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button id="updateDepartment" type="button" class="btn btn-warning">
+			请假</button>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button id="updateDepartment" type="button" class="btn btn-warning">
+			修改考勤</button>
+		</div>
+	</div>
+	
+	<div class="panel-body">
+	<div class="row row-where">
+		&nbsp;&nbsp;个人用户查询：
+		<br/><br/>
+		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			用户号：
+   			<input type="text" name="" class="form-control" placeholder="请输入用户号：" />
+   			时间：
+   			<input type="text" class="form-control" readonly="readonly" onclick="new Calendar().show(this);"/>
+   			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			<button type="button" class="btn btn-darkgreen">
+				查询
+			</button>
+   		</div>
+   		</div>
+   		<hr/>
+		<div class="row row-where">
+		&nbsp;&nbsp;部门查询：
+		<br/><br/>
+		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			部门名称：
+   			<select id="userId" name="userId" class="form-control">
+				<option value="-1">-- 部门名称 --</option>
+			</select>
+   			时间：
+   			<input type="text" class="form-control" readonly="readonly" onclick="new Calendar().show(this);"/>
+   			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			<button type="button" class="btn btn-darkgreen">
+				查询
+			</button>
+   		</div>
+   		</div>	
+		
+		
+	</div>	
+	
+	</div>
+	<div style="height: 80px;"></div>
+</body>
+</html>

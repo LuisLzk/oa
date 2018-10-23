@@ -41,9 +41,19 @@ public class permissionImpl implements IPermission {
 	@Override
 	public void updatePermision(Integer roleId, Integer[] permissionId) {
 		//删除原来的权限
-		permissionMapper.deletePermissionByRoleId(roleId);
+		//permissionMapper.deletePermissionByRoleId(roleId);
+		List<Integer> id=new ArrayList<>();
+		List<Integer> id2=new ArrayList<>();
+		for(int i=0;i<permissionId.length;i++){
+			id.addAll(permissionMapper.getPermissionByPid(permissionId[i]));
+			
+		}
+		
+		for(Integer in:id2){
+			System.out.println(in);
+		}
 		//添加新的权限
-		permissionMapper.insertPermission(roleId,permissionId);
+		//permissionMapper.insertPermission(roleId,permissionId);
 	}
 
 }

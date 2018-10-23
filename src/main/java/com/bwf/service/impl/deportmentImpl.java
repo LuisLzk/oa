@@ -60,5 +60,11 @@ public class deportmentImpl implements IDeportmentService {
 		deportmentMapper.addDepartment(department);
 	}
 
+	@Override
+	public void getCurrentDepartmentByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		deportmentMapper.getCurrentDepartmentByUserId(userId);
+	}
+
 	
 }

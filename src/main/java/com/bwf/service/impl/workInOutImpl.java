@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bwf.dao.WorkInOutMapper;
+import com.bwf.entity.AllShift;
 import com.bwf.entity.User;
 import com.bwf.entity.WorkInOut;
 import com.bwf.service.IWorkInOutSerivce;
@@ -55,6 +56,28 @@ public class workInOutImpl implements IWorkInOutSerivce {
 		workInOut.setOutTime(date);
 		workInOut.setUserId(user1.getUserId());
 		workInOutMapper.workOut(workInOut);
+	}
+
+	@Override
+	public void addShift(String shiftName, String shiftStartTime, String shiftEndTime) {
+		// TODO Auto-generated method stub
+		DateFormat date1= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		Date date2 = null;
+		Date date3 = null;
+		try {
+			date2=date1.parse(shiftStartTime);
+			date3=date1.parse(shiftEndTime);
+			System.out.println(date2);
+			System.out.println(date3);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AllShift allShift=new AllShift();
+		allShift.setShiftName(shiftName);
+		allShift.setShiftStartTime(date2);
+		allShift.setShiftEndTime(date3);
+		workInOutMapper.addShift(allShift);
 	}
 
 }

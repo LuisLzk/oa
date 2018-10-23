@@ -22,5 +22,7 @@ public interface DeportmentMapper {
 
 	void deleteDepartmentBySimgleDepartmentId(@Param("id")Integer departmentId);
 
+	void getCurrentDepartmentByUserId(Integer userId);
+
 
 }

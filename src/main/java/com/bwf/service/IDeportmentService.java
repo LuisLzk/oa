@@ -20,4 +20,6 @@ public interface IDeportmentService {
 
 	void updateDepartment(Department department);
 
+	void getCurrentDepartmentByUserId(Integer userId);
+
 }

@@ -24,6 +24,12 @@
 	<select id="getAllDeportment" resultMap="department">
 		select * from department
 	</select>
+	
+	<!-- 获取本部门所有成员 -->
+	<select id="getCurrentDepartmentByUserId">
+		
+	</select>
+	
 	<!-- 获取部门领导 -->
 	<select id="getDepartmentLeaderByDepartmentId" parameterType="int" resultMap="department">
 		select user.nick_name,department.* from department inner join user on department.user_id=user.user_id

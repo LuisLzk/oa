@@ -51,9 +51,14 @@
 			location.href='${rc.contextPath}/attendance?outTime='+now1;
 		});
 		
-		//排班
+		//创建班次
 		$('#addShift').click(function(){
 			location.href='${rc.contextPath}/addShift';
+		});
+		
+		//排班
+		$('#doRoster').click(function(){
+			location.href='${rc.contextPath}/doRoster';
 		});
 	});
 	</script>

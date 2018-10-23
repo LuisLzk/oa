@@ -16,6 +16,11 @@
 		select * from permission
 	</select>
 	
+	<select id="getPermissionByPid" resultType="com.bwf.entity.Permission">
+		select permission_id from permission where pid= #{permissionId}
+		
+	</select>
+	
 	<select id="getAllPermissionsByRoleId" parameterType="int" resultMap="permission">
 		select permission.* from
 		role_permission inner join permission 

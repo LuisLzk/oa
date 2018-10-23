@@ -6,4 +6,6 @@ public interface IWorkInOutSerivce {
 
 	void workOut(String outTime, Object attribute);
 
+	void addShift(String shiftName, String shiftStartTime, String shiftEndTime);
+
 }

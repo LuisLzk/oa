@@ -22,4 +22,9 @@
 	<insert id="workOut" parameterType="com.bwf.entity.WorkInOut">
 		insert into work_in_out values(null,#{userId},null,#{outTime})
 	</insert>
+	
+	<!-- 创建班次 -->
+	<insert id="addShift" parameterType="com.bwf.entity.AllShift">
+		insert into all_shift values(null,#{shiftName},#{shiftStartTime},#{shiftEndTime})
+	</insert>
 </mapper>

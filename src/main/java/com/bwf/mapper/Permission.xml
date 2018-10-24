@@ -16,9 +16,11 @@
 		select * from permission
 	</select>
 	
-	<select id="getPermissionByPid" resultType="com.bwf.entity.Permission">
-		select permission_id from permission where pid= #{permissionId}
-		
+	<select id="getPermissionByPid" resultMap="permission">
+		select permission_id from permission where pid in
+		<foreach collection="permissionId" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
 	</select>
 	
 	<select id="getAllPermissionsByRoleId" parameterType="int" resultMap="permission">

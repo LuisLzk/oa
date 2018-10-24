@@ -14,8 +14,8 @@ public interface PermissionMapper {
 
 	void deletePermissionByRoleId(Integer roleId);
 
-	void insertPermission(@Param("roleId")Integer roleId, @Param("permissionId")Integer[] permissionId);
+	void insertPermission(@Param("roleId")Integer roleId, @Param("permissionId")List<Integer> list);
 
-	List<Integer> getPermissionByPid(@Param("permissionId")Integer permissionId);
+	List<Permission> getPermissionByPid(@Param("permissionId")Integer[] permissionId);
 
 }
